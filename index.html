@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Crypto</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  </head>
+
+  <body>
+    <div id="app">
+      <template>
+	    <div>
+	      <v-app>
+	      	<h1>Bitcoin Price Index</h1>
+
+		    <v-simple-table dark>
+		      <template v-slot:default>
+		        <thead>
+		          <tr>
+		            <th>Code</th> 
+		            <th>Symbol</th>
+		            <th>Rate</th>
+		            <th>Description</th>
+		          </tr>  
+		        </thead>
+		        <tbody>
+		          <tr v-for="item in info" :key="item">
+		            <td>
+		              {{ item.code }}
+		            </td>
+		            <td>
+		              <span v-html="item.symbol"></span>
+		            </td>
+		            <td :class = "parseFloat(item.rate_float) > 40000 ? 'light-green--text' : 'red--text'">
+		              {{ item.rate_float | currencydecimal(item.rate_float) }}
+		            </td>
+		            <td>
+		              {{ item.description }}
+		            </td>
+		          </tr> 
+		        </tbody>  
+		      </template>
+	        </v-simple-table>
+	      </v-app> 
+	    </div>
+      </template>
+    </div>
+
+    <!-- Include vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <!-- Include vuetify js -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <!-- Include axios js -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="app.js"></script>
+
+  </body>
+</html>
